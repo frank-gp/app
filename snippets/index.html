@@ -19,7 +19,7 @@
         margin-top: 1em;
       }
     </style>
-    <h1>Create custom VS Code snippets</h1>
+    <h1>Snippets for VSCode</h1>
     <section>
       <a href="snippets_full.html">snippets_full</a>
       <br />
@@ -46,11 +46,7 @@
           },
         };
 
-        let jsonString = JSON.stringify(jsonObject, null, 2);
-
-        // Remove the first and last curly braces
-        jsonString = jsonString.substring(2, jsonString.length - 2);
-
+        const jsonString = JSON.stringify(jsonObject, null, 2);
         document.getElementById("jsonOutput").value = jsonString;
       }
       convertCodeToJson();

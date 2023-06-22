@@ -15,8 +15,10 @@
         flex: 1 1 auto;
         height: 75vh;
       }
+
     </style>
-    <h1>Snippets for VSCode</h1>
+    <h1>Create custom VS Code snippets</h1>
+
     <section class="textarea_container">
       <textarea id="codeInput" oninput="convertCodeToJson()">
 &lt;meta charset=&quot;UTF-8&quot; /&gt;
@@ -38,10 +40,14 @@
           },
         };
 
-        const jsonString = JSON.stringify(jsonObject, null, 2);
+        let jsonString = JSON.stringify(jsonObject, null, 2);
+
+        // Remove the first and last curly braces
+        jsonString = jsonString.substring(2, jsonString.length - 2);
+
         document.getElementById("jsonOutput").value = jsonString;
       }
-      convertCodeToJson()
+      convertCodeToJson();
     </script>
   </body>
 </html>
