@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IMG History</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      img {
+        width: 100%;
+      }
+      input {
+        outline: none;
+        padding: 0.3em 1em;
+        border-radius: 5em;
+        border: thin solid #000;
+      }
+      .form {
+        margin: 1em;
+      }
+      #imgURL {
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- https://i.ytimg.com/vi_webp/${youtubeID}/maxresdefault.webp -->
+    <!-- https://www.youtube.com/watch?v=41VZhwrXAKI -->
+
+    <section class="form">
+      <label>
+        youtube ID
+        <input id="youtubeID" value="41VZhwrXAKI" placeholder="youtube ID" />
+        <button id="myBtn" onclick="x()">Send</button>
+      </label>
+      <hr />
+      <input id="imgURL" value="https://i.ytimg.com/vi_webp/41VZhwrXAKI/maxresdefault.webp" />
+    </section>
+
+    <script>
+      let youtubeIDInput = document.querySelector("#youtubeID");
+      html = "";
+
+      youtubeIDInput.addEventListener("keypress", () => {
+        console.log(youtubeIDInput.value);
+        if (event.key === "Enter") {
+          event.preventDefault();
+          html += /*html*/ `
+<img src="${imgURL.value}" alt="">
+
+`;
+          document.body.insertAdjacentHTML("beforeend", html);
+        }
+      });
+
+      var imgURL = document.getElementById("imgURL");
+      imgURL.addEventListener("keypress", function (event) {
+        if (event.key === "Enter") {
+          event.preventDefault();
+          document.querySelector("#myBtn").click();
+        }
+      });
+
+      let x = () => {
+        console.log("w");
+        html += /*html*/ `
+<img src="https://i.ytimg.com/vi_webp/${youtubeIDInput.value}/maxresdefault.webp" alt="">
+
+`;
+        document.body.insertAdjacentHTML("beforeend", html);
+      };
+    </script>
+  </body>
+</html>

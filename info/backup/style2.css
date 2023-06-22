@@ -1,0 +1,37 @@
+body {
+  background-color: #7156be;
+}
+#app {
+  margin: 30px auto;
+  width: 50vw;
+  font-size: 16px;
+  line-height: 1.8;
+  font-family: "SF Pro Display", "SF Pro Icons", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+  background-color: #fff;
+  padding: 20px 50px;
+  border-radius: 20px;
+}
+#app ul {
+  margin-left: -35px;
+}
+#app li {
+  list-style: none;
+  width: 48%;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+#app b {
+  border-bottom: 2px dashed #dddddd20;
+  display: block;
+}
+@media (max-width: 640px) {
+  #app {
+    font-size: 16;
+    padding: 5px;
+    margin: 5px;
+    width: 80vw;
+  }
+  #app b {
+    margin-left: 0;
+  }
+}

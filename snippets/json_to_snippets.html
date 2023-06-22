@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JSON to Code Conversion</title>
+  </head>
+  <body>
+    <style>
+      .textarea_container {
+        display: flex;
+        gap: 0.2em;
+      }
+      .textarea_container textarea {
+        flex: 1 1 auto;
+        height: 75vh;
+      }
+    </style>
+    <h1>JSON to Code Conversion</h1>
+    <!-- <label for="input-textarea">JSON Input:</label> -->
+    <section class="textarea_container">
+      <textarea id="input-textarea" rows="10" cols="50" oninput="convertJsonToCode()">
+{
+
+  "favicon": {
+    "scope": "html",
+    "prefix": "favicon",
+    "body": [
+      "<meta charset='UTF-8' />"
+    ],
+    "description": "favicon"
+  }
+  
+}</textarea>
+      <!-- <label for="output-textarea">Code Output:</label> -->
+      <textarea id="output-textarea" rows="10" cols="50" readonly></textarea>
+    </section>
+
+    <script>
+      function convertJsonToCode() {
+        try {
+          // Retrieve the input and output textarea elements
+          const inputTextarea = document.getElementById("input-textarea");
+          const outputTextarea = document.getElementById("output-textarea");
+
+          // Parse the JSON input
+          const jsonData = JSON.parse(inputTextarea.value);
+
+          // Initialize an empty array to store the code lines
+          const codeLines = [];
+
+          // Iterate over each object in the JSON data
+          for (const key in jsonData) {
+            if (jsonData.hasOwnProperty(key)) {
+              const obj = jsonData[key];
+
+              // Retrieve the "body" property of the object and join its values into a single string
+              const bodyCode = obj.body.join("\n");
+
+              // Add the body code to the code lines array
+              codeLines.push(bodyCode);
+            }
+          }
+
+          // Join the code lines array into a single string, separating each line with a newline character
+          const codeOutput = codeLines.join("\n");
+
+          // Set the output textarea value with the generated code
+          outputTextarea.value = codeOutput;
+        } catch (error) {
+          // Handle any JSON parsing errors
+          outputTextarea.value = "Invalid JSON input";
+        }
+      }
+      convertJsonToCode();
+    </script>
+  </body>
+</html>

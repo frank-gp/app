@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style2.css" />
+    <title>info</title>
+  </head>
+  <body>
+    <!-- ========== vue... ========== -->
+    <!-- partial:index.partial.html -->
+    <div id="app">
+      <h2>What's my IP</h2>
+      <ul>
+        <li>IP: <b>{{results.ip}}</b></li>
+        <li>City: <b>{{results.city}}</b></li>
+        <li>Region: <b>{{results.region}}</b></li>
+        <li>Country: <b>{{results.country}}</b></li>
+        <li>Country Name: <b>{{results.country_name}}</b></li>
+        <li>Timezone: <b>{{results.timezone}}</b></li>
+        <li>Latitude: <b>{{results.latitude}}</b></li>
+        <li>Longitude: <b>{{results.longitude}}</b></li>
+        <li>UTC: <b>{{results.utc_offset}}</b></li>
+        <li>Postal: <b>{{results.postal}}</b></li>
+        <li>Iternet Provider: <b>{{results.org}}</b></li>
+      </ul>
+    </div>
+    <!-- partial -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+    <script src="./script2.js"></script>
+
+    <!-- ========== vue. ========== -->
+
+    <h2>window.innerWidth = <span id="innerWidth"></span></h2>
+    <h2>window.innerHeight = <span id="innerHeight"></span></h2>
+
+    <h2>OS = <span id="os"></span></h2>
+
+    <!-- partial:index.partial.html -->
+    <h2>Browser check</h2>
+    <!-- requires jquery, jquery.browser, and cookies.js -->
+    <!--start browser check -->
+    <noscript> Please enable JavaScript in order to check your browser. </noscript>
+    <div id="dynamic" class="noscript">
+      <div id="my-browser"></div>
+      <div id="my-screenres"></div>
+      <div id="my-ip"></div>
+      <div id="my-language"></div>
+      <div id="java-enabled" class="is-disabled">Java is <span class="yesJava is-hidden">enabled</span> <span class="noJava is-visible">disabled</span></div>
+      <div id="flash-enabled" class="is-disabled">Flash is <span class="yesFlash is-hidden">enabled</span> <span class="noFlash is-visible">disabled</span></div>
+      <div id="cookies-enabled" class="is-disabled">Cookies are <span class="yesCookies is-hidden">enabled</span> <span class="noCookies is-visible">disabled</span></div>
+      <div id="js-enabled" class="is-disabled">JavaScript is <span class="yesJs is-hidden">enabled</span> <span class="noJs is-visible">disabled</span></div>
+    </div>
+    <!--/dynamic-->
+    <!--end browser check -->
+    <!-- partial -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-browser/0.1.0/jquery.browser.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cookie.js/1.2.2/cookie.js"></script>
+    <script src="./script.js"></script>
+
+    <!-- ==========  ========== -->
+
+    <br />
+    <script>
+      document.querySelector("#innerWidth").innerHTML = window.innerWidth;
+      document.querySelector("#innerHeight").innerHTML = window.innerHeight;
+
+      // ========== os... ==========
+      function getOS() {
+        var userAgent = window.navigator.userAgent,
+          platform = window.navigator.platform,
+          macosPlatforms = ["Macintosh", "MacIntel", "MacPPC", "Mac68K"],
+          windowsPlatforms = ["Win32", "Win64", "Windows", "WinCE"],
+          iosPlatforms = ["iPhone", "iPad", "iPod"],
+          os = null;
+
+        if (macosPlatforms.indexOf(platform) !== -1) {
+          os = "Mac OS";
+        } else if (iosPlatforms.indexOf(platform) !== -1) {
+          os = "iOS";
+        } else if (windowsPlatforms.indexOf(platform) !== -1) {
+          os = "Windows";
+        } else if (/Android/.test(userAgent)) {
+          os = "Android";
+        } else if (!os && /Linux/.test(platform)) {
+          os = "Linux";
+        }
+
+        return os;
+      }
+      document.querySelector("#os").innerHTML = getOS();
+
+      // alert(getOS());
+      // ========== os. ==========
+    </script>
+  </body>
+</html>

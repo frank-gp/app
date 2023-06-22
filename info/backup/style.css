@@ -1,0 +1,36 @@
+body {
+  font-family: Open Sans, Calibri, Helvetica, sans serif;
+}
+
+.is-hidden {
+  display: none;
+}
+.is-visible {
+  display: inline-block;
+}
+.yesJs,
+.yesCookies,
+.yesJava,
+.yesFlash,
+.yesJs {
+  color: #336600;
+  font-weight: bold;
+}
+
+.noJs,
+.noCookies,
+.noJava,
+.noFlash,
+.noJs {
+  color: #ff0000;
+  font-weight: bold;
+}
+
+/* more Unicode at http://www.amp-what.com/unicode/search/ */
+.is-enabled:after {
+  content: " ✅";
+}
+
+.is-disabled:after {
+  content: " ❌";
+}

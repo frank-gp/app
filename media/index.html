@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>media</title>
+  </head>
+  <body>
+    <style>
+      body {
+        font-size: 1.5vw;
+      }
+      h2 {
+        background-color: #fff;
+        padding: 1em;
+        font-size: 1.5em;
+      }
+      @media (max-width: 80rem) {
+        body {
+          background-color: blue;
+          font-size: 1.75vw;
+        }
+      }
+      @media (max-width: 60rem) {
+        body {
+          background-color: green;
+          font-size: 2.25vw;
+        }
+      }
+      @media (max-width: 40rem) {
+        body {
+          background-color: red;
+          font-size: 3vw;
+        }
+      }
+    </style>
+    <h2>Width <span id="innerWidth"></span></h2>
+
+    <script>
+      (function funcResize() {
+        document.querySelector("#innerWidth").innerHTML = window.innerWidth;
+        window.addEventListener("resize", funcResize);
+      })();
+    </script>
+  </body>
+</html>

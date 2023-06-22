@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Replace Quotes</title>
+  </head>
+  <body>
+    <style>
+      .textarea_container {
+        display: flex;
+        height: 70vh;
+        gap: 0.1em;
+      }
+    </style>
+
+    <h2>Replace Quotes</h2>
+    <section class="textarea_container">
+      <textarea id="inputTextArea" rows="4" cols="50" placeholder="Enter your text..." oninput="replaceQuotes()"></textarea><br />
+      <textarea id="outputTextArea" rows="4" cols="50" placeholder="Replaced text..." readonly></textarea>
+    </section>
+    <script>
+      function replaceQuotes() {
+        let input = document.getElementById("inputTextArea").value;
+        let replacedStr = input.replace(/"/g, "'");
+        document.getElementById("outputTextArea").value = replacedStr;
+      }
+    </script>
+  </body>
+</html>
