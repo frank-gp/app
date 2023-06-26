@@ -55,7 +55,7 @@
           jsonData = "Invalid JavaScript code";
         }
 
-        document.getElementById("jsonOutput").value = jsonData;
+        document.getElementById("jsonOutput").value = `"body": [` + jsonData + `],`;
       }
       convertToJSON();
     </script>
