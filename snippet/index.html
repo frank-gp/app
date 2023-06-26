@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- SEO -->
+    <title>Frank GP — Android Developer</title>
+    <meta name="description" content="Design and Developer Android" />
+    <meta property="og:image" content="https://i0.wp.com/fgp.one/media/fgp-fb-cover.webp" />
+    <script src="https://frankgp.com/component/layout.js" type="module"></script>
+    <script src="https://frankgp.com/stats/send.js"></script>
+  </head>
+
+  <body>
+    <header-component></header-component>
+
+    <!-- https://frankgp.com/app/snippet/body.html -->
+    <main class="wp-content">
+      <style>
+        .textarea_container {
+          display: flex;
+          gap: 0.2em;
+        }
+        .textarea_container textarea {
+          flex: 1 1 auto;
+          height: 75vh;
+          background-color: rebeccapurple;
+          color: white;
+          padding: 1em;
+        }
+        section {
+          margin-top: 1em;
+        }
+      </style>
+
+      <h1>Create custom VS Code snippets</h1>
+      <section>
+        <a class="btn icon-public" target="_blank" href="https://fgp.one/vscode-snippet/"> Examples</a>
+        <a class="btn icon-public" target="_blank" href="https://snippet-generator.app/"> snippet-generator.app</a>
+        <hr />
+        <a class="btn icon-code" href="./"> snippet</a>
+        <a class="btn icon-code" href="body.html"> body</a>
+        <a class="btn icon-code" href="full.html"> full</a>
+      </section>
+
+      <section class="textarea_container">
+        <textarea id="codeInput" oninput="convertCodeToJson()">
+&lt;link rel=&#39;icon&#39; href=&#39;https://i0.wp.com/fgp.one/media/favicon.webp&#39; sizes=&#39;256x256&#39; /&gt;
+        </textarea>
+        <textarea id="jsonOutput"></textarea>
+      </section>
+
+      <script>
+        function convertCodeToJson() {
+          let codeInput = document.getElementById("codeInput").value.trim();
+          codeInput = codeInput.replace(/"/g, "'"); // Replace all double quotes with single quotes
+
+          const jsonObject = {
+            demo: {
+              scope: "html",
+              prefix: "demo",
+              body: [codeInput],
+              description: "demo",
+            },
+          };
+
+          let jsonString = JSON.stringify(jsonObject, null, 2);
+
+          // Remove the first and last curly braces
+          jsonString = jsonString.substring(2, jsonString.length - 2);
+
+          document.getElementById("jsonOutput").value = jsonString;
+        }
+        convertCodeToJson();
+      </script>
+    </main>
+    <fgp-lib>
+      <!-- <script src='https://f-gp.github.io/lib/highlight.js' type='module'></script> -->
+      <!-- <script src='https://frankgp.com/lib/js/clipboard.js' defer></script> -->
+    </fgp-lib>
+
+    <footer-component></footer-component>
+  </body>
+</html>
