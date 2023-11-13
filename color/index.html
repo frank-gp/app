@@ -3,249 +3,230 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="https://asset.fgp.one/file/fgp-favicon-256px.webp" sizes="256x256" />
-    <meta property="og:image" content="https://asset.fgp.one/file/fgp-fb-cover.webp" />
-    <meta property="og:image:width" content="600" />
-    <meta property="og:image:height" content="314" />
-
-    <title>3 Digit Hex Colors Generator Code</title>
-    <meta name="description" content="Generate hexadecimal color codes using true randomness, originating from atmospheric noise." />
+    <script src="https://frankgp.com/component/layout.js" type="module"></script>
   </head>
   <body>
-    <section class="controls"></section>
-    <i class="icon-refresh"></i>
+    <!DOCTYPE html>
+    <html lang="en">
+      <head>
+        <script src="https://frankgp.com/component/stat.js" type="module"></script>
+        <script src="https://frankgp.com/component/layout.js" type="module"></script>
+        <script src="https://frankgp.com/component/loader.js"></script>
+        <title>Frank GP | Developer</title>
+      </head>
+      <body>
+        <main>
+          <style>
+            * {
+              box-sizing: border-box;
+              /* border: 1px dashed #808; */
+            }
 
-    <style>
-      @import url("https://frank-gp.github.io/icon/icomoon/style.css");
+            body main {
+              font-size: 1em;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              height: 100vh;
+              margin: 5vh auto;
+            }
+            .hexGenerator {
+              display: flex;
+              /* gap: 2em; */
+              text-align: center;
+              flex-direction: column;
+              color: #536;
+              align-items: center;
+            }
+            .sliders_container {
+              display: flex;
+              gap: 1em;
+              flex-direction: row;
+              /* transform: rotate(270deg); */
+              /* transform: rotate(.75turn); */
+              /* width: 15rem; */
+              background-color: #fffe;
+              padding: 1.5em 2em;
+              box-shadow: 3px 3px 3px #0002;
+              justify-content: center;
 
-      /* ========== global... ========== */
-      * {
-        /* border: 1px dashed #0808; */
-        box-sizing: border-box;
-        font-family: monospace;
-        margin: 0;
-      }
-      body {
-        /* text-align: center; */
-        height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        /* font-size: 1.5em; */
-        flex-direction: column;
-        text-align: center;
-        background-color: #458;
-        color: #555;
-        overflow-y: hidden;
-        position: fixed;
-        width: 100%;
+              /* position: fixed; */
+            }
+            .sliders_container div {
+              display: flex;
+              flex-direction: column;
+              align-self: center;
+              justify-content: center;
+              align-items: center;
+              gap: 1em;
+            }
+            .sliders_container i {
+              /* transform: rotate(90deg); */
+              display: inline-flex;
+              /* width: 1em; */
+              height: 1em;
+              aspect-ratio: 1/1;
+            }
+            .h2_container {
+              background-color: #fff;
+              margin-bottom: 1em;
+              padding: 1em;
+              display: grid;
+              gap: 1em;
+              box-shadow: 3px 3px 3px #0002;
+              border-radius: 0.5em;
+              border: 1px solid #0002;
+              min-width: 20rem;
+            }
+            .h2_container h2 {
+              font-weight: normal;
+            }
 
-        -webkit-user-select: none;
-        -webkit-touch-callout: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-      }
-      i {
-        font-style: normal;
-      }
-      h1 {
-        filter: invert();
-        position: absolute;
-        bottom: 1em;
-      }
-      h2 {
-        font-size: 3em;
-        margin: 0;
-        padding: 0;
-        width: 100%;
-        text-align: center;
-        color: indianred;
-      }
-      /* ========== global. ========== */
+            .hexGenerator .btn-app {
+              aspect-ratio: 1/1;
+              background-color: #fff;
+            }
+            .btn-app i {
+              font-size: 1.5em;
+            }
+            /* Style to rotate the range input vertically */
+            input[type="range"] {
+              writing-mode: bt-lr; /* Bottom-to-top, left-to-right */
+              /* transform: rotate(180deg); */
+              /* -webkit-appearance: slider-vertical; */
+              /* -webkit-appearance: slider-vertical; */
+              /* transform: rotate(0.5turn); */
+              -webkit-appearance: slider-vertical;
+              /* transform: rotate(90deg); */
 
-      .controls {
-        display: inline-flex;
-        gap: 1.3em;
-        flex-direction: column;
-        justify-content: center;
-        background-color: beige;
-        background-color: rgb(26, 26, 53);
-        border: 1em solid white;
-        text-align: center;
-        margin: 2em;
-        padding: 2em;
-      }
-      .controls aside {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 2em;
-      }
+              /* height: 2em;  */
+              width: 1em;
+              /* margin: 20px 0; */
+            }
+            .hexGenerator h2:hover {
+              opacity: 0.7;
+              cursor: pointer;
+            }
+            .hexGenerator h2:active {
+              content: "copied";
+              background-color: white;
+              opacity: 1;
+              color: #000;
+              position: relative;
+            }
+            .hexGenerator h2:active:after {
+              content: "✅ copied...";
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              padding-left: 1em;
+              position: absolute;
+              inset: 0;
+              color: #000;
+              background-color: #fff;
+            }
+          </style>
+          <section class="hexGenerator">
+            <div class="h2_container">
+              <h2 class="colorDec"></h2>
+              <h2 class="colorHex"></h2>
+              <h2 class="colorHex3dig"></h2>
+            </div>
+            <div class="sliders_container">
+              <div>
+                <i style="color: red">R</i>
+                <input type="range" class="red" min="0" max="255" value="34" orient="vertical" />
+                <i style="color: cyan">C</i>
+              </div>
+              <div>
+                <i style="color: green">G</i>
+                <input type="range" class="green" min="0" max="255" value="34" orient="vertical" />
+                <i style="color: magenta">M</i>
+              </div>
+              <div>
+                <i style="color: blue">B</i>
+                <input type="range" class="blue" min="0" max="255" value="34" orient="vertical" />
+                <i style="color: yellow">Y</i>
+              </div>
+            </div>
+            <br />
+            <div>
+              <button class="btn btn-app" onclick="regenerateRandomColor()"><i class="icon-refresh"></i></button>
+            </div>
+          </section>
+          <script>
+            document.addEventListener("DOMContentLoaded", function () {
+              // Run this code when the page is fully loaded
+              regenerateRandomColor();
+            });
 
-      input[type="range"][orient="vertical"] {
-        writing-mode: bt-lr;
-        -webkit-appearance: slider-vertical;
-        width: 1em;
-        height: 15em;
-        padding: 0 0.5em;
-        cursor: pointer;
-        /* font-size: inherit; */
-        /* font-weight: 700; */
-      }
-      input[type="range"]::-webkit-slider-thumb {
-        margin-top: -8.9px;
-        width: 26px;
-        height: 29px;
-        background: #44ab7d;
-        border: 0.5px solid #000000;
-        cursor: pointer;
-        -webkit-appearance: none;
-      }
-      .input_container {
-        display: inline-flex;
-        flex-direction: column;
-        align-items: center;
-        font-size: 2em;
-      }
+            const sliders = document.querySelectorAll(".sliders_container input");
 
-      .icon-refresh {
-        font-size: 2em;
-        color: white;
-        background-color: black;
-        padding: 0.5em;
-      }
-      .icon-refresh:hover {
-        background-color: #458;
-        cursor: pointer;
-      }
-    </style>
+            sliders.forEach((slider) => {
+              slider.addEventListener("input", updateColor);
+            });
 
-    <script>
-      function mainColor() {
-        const hex = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, "A", "B", "C", "D", "E", "F"];
-        // ========== random... ==========
+            function updateColor() {
+              const red = document.querySelector(".red").value;
+              const green = document.querySelector(".green").value;
+              const blue = document.querySelector(".blue").value;
 
-        function getRandomItem(array1) {
-          const randomIndex = Math.floor(Math.random() * array1.length);
-          const item = array1[randomIndex];
-          return item;
-        }
+              const hexColor = rgbToHex(red, green, blue);
+              console.log(hexColor.red.charAt(0));
+              document.querySelector(".colorDec").textContent = `rgb(${red}, ${green}, ${blue})`;
+              document.querySelector(".colorHex").textContent = `#${hexColor.red}${hexColor.green}${hexColor.blue}`;
+              document.querySelector(".colorHex3dig").textContent = `#${hexColor.red.charAt(0)}${hexColor.green.charAt(0)}${hexColor.blue.charAt(0)}`;
+              document.body.style.backgroundColor = `rgb(${red}, ${green}, ${blue})`;
+            }
 
-        const redRandom = getRandomItem(hex);
-        const greenRandom = getRandomItem(hex);
-        const blueRandom = getRandomItem(hex);
-        let bcTopPage = `#${redRandom}${greenRandom}${blueRandom}`;
-        // console.log(redRandom);
-        // console.log(greenRandom);
-        // console.log(blueRandom);
+            function rgbToHex(r, g, b) {
+              let red = parseInt(r, 10).toString(16);
+              let green = parseInt(g, 10).toString(16);
+              let blue = parseInt(b, 10).toString(16);
 
-        // ========== random. ==========
+              red = red.length === 1 ? "0" + red : red;
+              green = green.length === 1 ? "0" + green : green;
+              blue = blue.length === 1 ? "0" + blue : blue;
 
-        // ========== dom... ==========
-        let controls = document.querySelector(".controls");
-        document.body.style.background = bcTopPage;
+              return { red, green, blue };
+            }
 
-        let html = /*html*/ ` 
+            function regenerateRandomColor() {
+              // Generate random RGB values
+              const randomRed = Math.floor(Math.random() * 256);
+              const randomGreen = Math.floor(Math.random() * 256);
+              const randomBlue = Math.floor(Math.random() * 256);
 
-<h2 class="clipboard">${bcTopPage}</h2>
+              // Update sliders and color
+              document.querySelector(".red").value = randomRed;
+              document.querySelector(".green").value = randomGreen;
+              document.querySelector(".blue").value = randomBlue;
 
-<aside>
-  <div class="input_container">
-    <i style="color: red">R</i>
-    <input id="inputRed" type="range" min="0" value="${redRandom}6" max="15" step="1" orient="vertical" data-num="0" />
-    <i style="color: cyan">C</i>
-  </div>
+              updateColor();
+            }
+          </script>
+          <script>
+            // Function to copy text content to clipboard
+            function copyToClipboard(element) {
+              const textContent = element.textContent;
+              const textarea = document.createElement("textarea");
+              textarea.value = textContent;
+              document.body.appendChild(textarea);
+              textarea.select();
+              document.execCommand("copy");
+              document.body.removeChild(textarea);
+            }
 
-  <div class="input_container">
-    <i style="color: green">G</i>
-    <input id="inputGreen" type="range" min="0" value="${greenRandom}2" max="15" step="1" orient="vertical" data-num="1" />
-    <i style="color: magenta">M</i>
-  </div>
-
-  <div class="input_container">
-    <i style="color: blue">B</i>
-    <input id="inputBlue" type="range" min="0" value="${blueRandom}10" max="15" step="1" orient="vertical" data-num="2" />
-    <i style="color: yellow">Y</i>
-  </div>
-</aside>
-`;
-        controls.innerHTML = html;
-        // ========== dom. ==========
-
-        // ========== controls... ==========
-        let inputAll = document.querySelectorAll("input");
-        let spanAll = document.querySelectorAll("span");
-
-        inputAll.forEach((item1) => {
-          item1.oninput = function () {
-            // console.log(item1.dataset.num); //1
-            bgColor();
-          };
-        });
-
-        let bgColor = () => {
-          let bgColorHex = `#${hex[inputAll[0].value]}${hex[inputAll[1].value]}${hex[inputAll[2].value]}`;
-          document.body.style.backgroundColor = bgColorHex;
-          document.querySelector("h2").textContent = bgColorHex;
-        };
-        bgColor();
-        // ========== controls. ==========
-
-        // ========== Copy... ==========
-        const _clipboard = document.querySelectorAll("h2.clipboard");
-        const _pre = document.querySelectorAll("pre");
-
-        _clipboard.forEach((item) => {
-          item.addEventListener("click", () => {
-            navigator.clipboard.writeText(item.textContent);
-            console.log(item.textContent);
-          });
-        });
-
-        _pre.forEach((item) => {
-          item.addEventListener("click", () => {
-            navigator.clipboard.writeText(item.textContent);
-            console.log(item.textContent);
-          });
-        });
-
-        const styleSheet = document.createElement("style");
-        styleSheet.innerHTML = /* css */ `/*  */
-.clipboard,
-pre {
-cursor: pointer;
-position: relative;
-}
-.clipboard:hover::before,
-pre:hover::before {
-content: "Copy";
-position: absolute;
-left: 100%;
-font-size: 0.5em;
-top: 25%;
-background-color: #000c;
-color: white;
-padding: 0 0.5em;
-}
-.clipboard:active::before,
-pre:active::before {
-content: "Copied!";
-}
-`;
-        document.head.appendChild(styleSheet);
-
-        // ========== Copy. ==========
-      }
-      mainColor();
-
-      // ========== refresh... ==========
-      document.querySelector(".icon-refresh").onclick = function () {
-        // bgColor();
-        // location.reload();
-        mainColor();
-      };
-      // ========== refresh. ==========
-    </script>
+            // Select all elements with class "link" and attach the click event
+            const codeElements = document.querySelectorAll("h2");
+            codeElements.forEach((codeElement) => {
+              codeElement.onclick = function () {
+                copyToClipboard(this);
+              };
+            });
+          </script>
+        </main>
+      </body>
+    </html>
   </body>
 </html>

@@ -1,25 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="https://fgp.one/favicon.webp" sizes="256x256" />
+    <meta name="theme-color" content="#347" />
+    <meta name="author" content="Frank GP" />
+    <meta name="site_locale" content="en_PE" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://frankgp.com/icon/icomoon/style.css" />
+    <link rel="stylesheet" href="https://frankgp.com/component/global.css" />
+
+    <!-- component -->
+    <script src="https://frankgp.com/component/header.js" type="module"></script>
+    <script src="https://frankgp.com/component/footer.js" type="module"></script>
+    <script src="https://frankgp.com/component/stat.js" type="module"></script>
+    <!-- <script src="https://frankgp.com/component/social.js" defer></script> -->
+    <!-- <script src="https://frankgp.com/component/contact.js" defer></script> -->
+
+    <!-- lib -->
+    <!-- <script src="https://frankgp.com/lib/js/clipboard.js" defer></script> -->
+    <!-- <script src="https://frankgp.com/lib/js/highlight.js"></script> -->
+    <!-- <script src="https://frankgp.com/lib/js/youtube-embed.js"></script> -->
+
     <!-- SEO -->
     <title>Frank GP — Android Developer</title>
-    <meta name="description" content="Design and Developer Android" />
-    <meta property="og:image" content="https://i0.wp.com/fgp.one/media/fgp-fb-cover.webp" />
-    <script src="https://frankgp.com/component/layout.js" type="module"></script>
-    <script src="https://frankgp.com/stats/send.js"></script>
+    <meta name="robots" content="index" />
+    <meta name="description" content="Research, design and development" />
+
+    <!-- Open Graph tags -->
+    <meta property="og:title" content="Frank GP — Android Developer" />
+    <meta property="og:description" content="Research, design and development" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://frankgp.com" />
+    <meta property="og:image" content="https://fgp.one/fb-cover.webp" />
+    <meta property="og:image:width" content="600" />
+    <meta property="og:image:height" content="314" />
+    <meta property="fb:app_id" content="1526445401046904" />
   </head>
 
   <body>
-    <header-component></header-component>
+    <script src="https://frankgp.com/component/loader.js"></script>
 
-    <!-- https://frankgp.com/app/snippet/body.html -->
-    <main class="wp-content">
+    <main>
       <style>
         .textarea_container {
           display: flex;
           gap: 0.2em;
         }
-        .textarea_container textarea {
+        .input_container {
+          display: flex;
+          flex-direction: column;
+          gap: 0.3em;
+        }
+        section textarea {
           flex: 1 1 auto;
           height: 75vh;
           background-color: rebeccapurple;
@@ -29,8 +64,11 @@
         section {
           margin-top: 1em;
         }
+        main {
+          display: flex;
+          flex-direction: column;
+        }
       </style>
-
       <h1>Create custom VS Code snippets</h1>
       <section>
         <a class="btn icon-public" target="_blank" href="https://fgp.one/vscode-snippet/"> Examples</a>
@@ -40,25 +78,65 @@
         <a class="btn icon-code" href="body.html"> body</a>
         <a class="btn icon-code" href="full.html"> full</a>
       </section>
-
+      <section class="input_container">
+        <div>
+          <label for="demoInput">Name:</label>
+          <input type="text" id="demoInput" oninput="convertCodeToJson()" value="fgp_snippets" />
+        </div>
+        <div>
+          <label for="scopeInput">Scope:</label>
+          <input type="text" id="scopeInput" oninput="convertCodeToJson()" value="javascript" />
+        </div>
+        <div>
+          <label for="prefixInput">Prefix:</label>
+          <input type="text" id="prefixInput" oninput="convertCodeToJson()" value="fgp_snippets" />
+        </div>
+        <div>
+          <label for="descriptionInput">Description:</label>
+          <input type="text" id="descriptionInput" oninput="convertCodeToJson()" value="fgp_snippets" />
+        </div>
+      </section>
       <section class="textarea_container">
-        <textarea id="codeInput" oninput="convertCodeToJson()">
-&lt;link rel=&#39;icon&#39; href=&#39;https://i0.wp.com/fgp.one/media/favicon.webp&#39; sizes=&#39;256x256&#39; /&gt;
-        </textarea>
+        <textarea id="codeInput" oninput="convertCodeToJson()"></textarea>
         <textarea id="jsonOutput"></textarea>
       </section>
-
       <script>
+        // Load values from localStorage on page load
+        window.onload = function () {
+          loadValuesFromLocalStorage();
+          convertCodeToJson();
+        };
+
+        function loadValuesFromLocalStorage() {
+          const demoInput = document.getElementById("demoInput");
+          const scopeInput = document.getElementById("scopeInput");
+          const prefixInput = document.getElementById("prefixInput");
+          const descriptionInput = document.getElementById("descriptionInput");
+          const codeInput = document.getElementById("codeInput");
+
+          demoInput.value = localStorage.getItem("demo") || "demo";
+          scopeInput.value = localStorage.getItem("scope") || "html";
+          prefixInput.value = localStorage.getItem("prefix") || "demo";
+          descriptionInput.value = localStorage.getItem("description") || "demo";
+          codeInput.value = localStorage.getItem("codeInput") || "";
+        }
+
         function convertCodeToJson() {
           let codeInput = document.getElementById("codeInput").value.trim();
-          codeInput = codeInput.replace(/"/g, "'"); // Replace all double quotes with single quotes
+          // Escape "${" by adding a backslash before it
+          codeInput = codeInput.replace(/\$\{/g, "\\${");
+
+          const demo = document.getElementById("demoInput").value;
+          const scope = document.getElementById("scopeInput").value;
+          const prefix = document.getElementById("prefixInput").value;
+          const description = document.getElementById("descriptionInput").value;
 
           const jsonObject = {
-            demo: {
-              scope: "html",
-              prefix: "demo",
+            [demo]: {
+              scope: scope,
+              prefix: prefix,
               body: [codeInput],
-              description: "demo",
+              description: description,
             },
           };
 
@@ -68,15 +146,15 @@
           jsonString = jsonString.substring(2, jsonString.length - 2);
 
           document.getElementById("jsonOutput").value = jsonString;
+
+          // Save values to localStorage
+          localStorage.setItem("demo", demo);
+          localStorage.setItem("scope", scope);
+          localStorage.setItem("prefix", prefix);
+          localStorage.setItem("description", description);
+          localStorage.setItem("codeInput", codeInput);
         }
-        convertCodeToJson();
       </script>
     </main>
-    <fgp-lib>
-      <!-- <script src='https://f-gp.github.io/lib/highlight.js' type='module'></script> -->
-      <!-- <script src='https://frankgp.com/lib/js/clipboard.js' defer></script> -->
-    </fgp-lib>
-
-    <footer-component></footer-component>
   </body>
 </html>

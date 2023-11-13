@@ -1,35 +1,22 @@
 /* Import Google font - Poppins */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
-*{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
-}
-body{
-  display: flex;
-  align-items: center;
-  padding: 0 10px;
-  justify-content: center;
-  min-height: 100vh;
-  background: #9B59B6;
-}
-.wrapper{
+
+main .wrapper{
   width: 450px;
   background: #fff;
   border-radius: 10px;
   box-shadow: 0 15px 40px rgba(0,0,0,0.12);
 }
-.wrapper header{
+main .wrapper .header{
   display: flex;
   align-items: center;
   padding: 25px 30px 10px;
   justify-content: space-between;
 }
-header .icons{
+main .header .icons{
   display: flex;
 }
-header .icons span{
+main .header .icons span{
   height: 38px;
   width: 38px;
   margin: 0 1px;
@@ -41,50 +28,50 @@ header .icons span{
   user-select: none;
   border-radius: 50%;
 }
-.icons span:last-child{
+main .icons span:last-child{
   margin-right: -10px;
 }
-header .icons span:hover{
+main .header .icons span:hover{
   background: #f2f2f2;
 }
-header .current-date{
+main .header .current-date{
   font-size: 1.45rem;
   font-weight: 500;
 }
-.calendar{
+main .calendar{
   padding: 20px;
 }
-.calendar ul{
+main .calendar ul{
   display: flex;
   flex-wrap: wrap;
   list-style: none;
   text-align: center;
 }
-.calendar .days{
+main .calendar .days{
   margin-bottom: 20px;
 }
-.calendar li{
+main .calendar li{
   color: #333;
   width: calc(100% / 7);
   font-size: 1.07rem;
 }
-.calendar .weeks li{
+main .calendar .weeks li{
   font-weight: 500;
   cursor: default;
 }
-.calendar .days li{
+main .calendar .days li{
   z-index: 1;
   cursor: pointer;
   position: relative;
   margin-top: 30px;
 }
-.days li.inactive{
+main .days li.inactive{
   color: #aaa;
 }
-.days li.active{
+main .days li.active{
   color: #fff;
 }
-.days li::before{
+main .days li::before{
   position: absolute;
   content: "";
   left: 50%;
@@ -95,10 +82,10 @@ header .current-date{
   border-radius: 50%;
   transform: translate(-50%, -50%);
 }
-.days li.active::before{
+main .days li.active::before{
   background: #9B59B6;
   /* z-index: 9; */
 }
-.days li:not(.active):hover::before{
+main .days li:not(.active):hover::before{
   background: #f2f2f2;
 }
