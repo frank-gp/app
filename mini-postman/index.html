@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://frankgp.com/component/stat.js" type="module"></script>
+    <script src="https://frank-gp.github.io/component/stat.js" type="module"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css" />
     <title>Fetch Example</title>
     <style>
@@ -65,13 +65,33 @@
           <button type="button" onclick="sendRequest('POST')">POST</button>
           <button type="button" onclick="sendRequest('PUT')">PUT</button>
           <button type="button" onclick="sendRequest('DELETE')">DELETE</button><br /><br />
+
+          <script>
+            let buttonAll = document.querySelectorAll("button");
+            buttonAll.forEach((element) => {
+              element.addEventListener("click", function () {
+                this.setAttribute("disabled", "");
+                this.setAttribute("aria-busy", "true");
+                // this.textContent = "Please wait…"
+              });
+            });
+
+            function removeLoading() {
+              buttonAll.forEach((element) => {
+                element.removeAttribute("disabled", "");
+                element.removeAttribute("aria-busy");
+              });
+            }
+          </script>
         </aside>
-        <a href="https://api.1rodemayo.com/crud/reset" onclick="reset()">reset</a>
+        <a href="https://api.1rodemayo.com/crud/reset" onclick="reset(event)">reset</a>
+        <a href="https://api.1rodemayo.com/crud/enable" target="_blank">enable</a>
+        <a href="https://api.1rodemayo.com/crud/disable" target="_blank">disable</a>
 
         <div class="container">
           <pre><code>{"id": 2,"name": "Peter Demo 2"}</code></pre>
-          <textarea name="" id="requestData" cols="30" rows="10" placeholder="textarea_input"></textarea>
-          <textarea name="" id="responseData" cols="30" rows="10" placeholder="textarea_output"></textarea>
+          <textarea name="" id="requestData" cols="30" rows="10" placeholder="requestData"></textarea>
+          <textarea name="" id="responseData" cols="30" rows="10" placeholder="responseData"></textarea>
         </div>
 
         <!-- <label for="requestData">Request Data:</label><br />
@@ -92,7 +112,6 @@
           <label for="">api<input type="text" name="" id="" readonly value="https://api.1rodemayo.com/movies" /></label>
         </div>
       </section>
-      ]
       <script>
         function sendRequest(method) {
           var contentType = document.getElementById("content-type").value;
@@ -145,7 +164,8 @@
               console.log(data);
               document.getElementById("responseData").value = JSON.stringify(data, null, 2);
             })
-            .catch((error) => console.error("Error:", error));
+            .catch((error) => console.error("Error:", error))
+            .finally(() => removeLoading());
         }
 
         function reset() {
